@@ -1,11 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from '../src/components/login'
-import GlobalSytyle from '../src/styles/global';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AuthProvider } from './Context/AuthContext';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './Routes';
+import GlobalStyle from './styles/global';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.render(
   <React.StrictMode>
-      <App />
-      <GlobalSytyle />
-  </React.StrictMode>
-)
+    <AuthProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>           
+    </AuthProvider>
+    <GlobalStyle />
+  </React.StrictMode>,
+  document.getElementById('root')
+);

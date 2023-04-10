@@ -6,7 +6,7 @@ const globalStyle = createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    background: #2A2A2A;
+    max-height: 100vh;
   }
 
   body, input, button {
