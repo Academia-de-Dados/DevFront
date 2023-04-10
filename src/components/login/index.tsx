@@ -1,37 +1,63 @@
-import React from "react";
-import { FormLogin } from "../../styles/style";
-import { Button } from "../../tools/Button";
-import  imageLogo from "../../assets/logo.png"
+import React from 'react';
+import { Button, Form, Input, Row, Col, message } from 'antd';
+import { useAuth } from '../../Context/AuthContext/useAuth';
+import { useNavigate  } from 'react-router-dom';
 
-const Login: React.FC = () => {
+
+function Login() {
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  const onFinish = async (values: {email: string, password: string}) => {
+    try {
+        await auth.authenticate(values.email, values.password);
+        message.success('Login realizado com sucesso!')
+        navigate('/Home');
+    } catch (error) {
+        message.error('Ops! Verifique email ou senha!')
+    }
+  };
+
   return (
-    <>  
-        <FormLogin>
-            <div className="divMaster">
-                <div className="logo">
-                    <img src={imageLogo} alt="logo do site" />
-                </div>
-                <div className="formLogin">
-                    <h1>Academia de Dados</h1>
-                    <form action="">
-                        <div>
-                            <label htmlFor="">Usuário</label>
-                            <input type="text" placeholder="Digite seu e-mail" id="user"/>
-                        </div>
-                        <div>
-                            <label htmlFor="">Digite sua senha</label>
-                            <input type="password" placeholder="Digite sua senha" id="user"/>
-                        </div>
-                        <div>  
-                            <Button>Entrar</Button>
-                        </div>
-                    </form>
-                    <a href="">Sou novo aqui!</a>
-                    <a href="">Esqueci minha senha!</a>
-                </div>
-            </div>
-        </FormLogin>
-    </>
+    <Row
+      justify='center'
+      align='middle'
+      style={{
+        height: '100vh',
+      }}
+    >
+      <Col span={12}>
+        <Form
+          name='basic'
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          onFinish={onFinish}
+        >
+          <Form.Item
+            label='Email'
+            name='email'
+            rules={[{ required: true, message: 'Please input your email!' }]}
+          >
+            <Input /> 
+          </Form.Item>
+
+          <Form.Item
+            label='Password'
+            name='password'
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password /> 
+          </Form.Item>
+
+          <Form.Item wrapperCol={{ offset:8, span: 16 }}>
+            <Button type='primary' htmlType='submit'>
+              Entrar
+            </Button>   
+          </Form.Item>
+        </Form>
+      </Col>
+    </Row>
   );
-};
+}
+
 export default Login;
