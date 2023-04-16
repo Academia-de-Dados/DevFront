@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext/useAuth';
 import { useToast } from '../Hooks/Toast';
 
-const ProtectedLayout = ({ children }: { children: JSX.Element }): JSX.Element | null => {
+function ProtectedLayout({
+  children,
+}: {
+  children: JSX.Element;
+}): JSX.Element | null {
   const { ToastError } = useToast();
   const auth = useAuth();
   const navigation = useNavigate();
@@ -14,5 +18,5 @@ const ProtectedLayout = ({ children }: { children: JSX.Element }): JSX.Element |
   }
 
   return children;
-};
-export default ProtectedLayout
+}
+export default ProtectedLayout;
