@@ -12,7 +12,11 @@ const AppRoutes: React.FC = () => {
       <Route path="/" element={<Login />} />
       <Route
         path="/Home"
-        element={<ProtectedLayout><Home /></ProtectedLayout>}
+        element={
+          <ProtectedLayout>
+            <Home />
+          </ProtectedLayout>
+        }
       />
     </Routes>
   );

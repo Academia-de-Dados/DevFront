@@ -1,4 +1,10 @@
-import React, { useState, createContext, useContext, useCallback, ReactNode } from 'react';
+import React, {
+  useState,
+  createContext,
+  useContext,
+  useCallback,
+  ReactNode,
+} from 'react';
 import { toast } from 'react-toastify';
 
 import { ToastContainer } from './styles';
